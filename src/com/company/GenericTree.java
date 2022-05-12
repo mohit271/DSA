@@ -277,6 +277,7 @@ public class GenericTree {
     }
 
     public static void removeLeaves(Node node) {
+        //loop from back as from front it will skip some items after removing
         for (int i = node.children.size() - 1; i >= 0; i--) {
             Node child = node.children.get(i);
             if (child.children.size() == 0) {
@@ -573,7 +574,7 @@ public class GenericTree {
 
 //        System.out.println(height(root));
 
-        levelOrderPair(root);
+//        levelOrderPair(root);
 
 
 //        boolean flag = existInTree(root, data);
