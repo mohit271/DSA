@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Recursion {
 
@@ -260,18 +261,155 @@ public class Recursion {
 
     }
 
+    public static void floodFill(int[][] maze, int row, int col, String asf) {
+
+        if (row < 0 || col < 0 || row == maze.length || col == maze[0].length || maze[row][col] == 1
+                || maze[row][col] == 2) {
+            return;
+        }
+        if (row == maze.length - 1 && col == maze[0].length - 1) {
+            System.out.println(asf);
+            return;
+        }
+        maze[row][col] = 2;
+        floodFill(maze, row - 1, col, asf + "t");
+        floodFill(maze, row, col - 1, asf + "l");
+        floodFill(maze, row + 1, col, asf + "d");
+        floodFill(maze, row, col + 1, asf + "r");
+        maze[row][col] = 0;
+    }
+
+    public static void targetSumSubset(int[] arr, int idx, int target, int stn, String result) {
+
+        if (idx == arr.length) {
+            if (stn == target) {
+                System.out.println(result + ".");
+            }
+            return;
+        }
+        //            stn+=stn+arr[idx];
+
+        targetSumSubset(arr, idx + 1, target, stn + arr[idx], result + arr[idx] + ",");
+        targetSumSubset(arr, idx + 1, target, stn, result);
+    }
+
+    public static void printNQueens(int[][] arr, int n, int row, String csf) {
+
+        if (row == n) {
+            System.out.println(csf + ".");
+            return;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (isQueenSafe(arr, row, i) && row != i) {
+                arr[row][i] = 1;
+                printNQueens(arr, n, row + 1, csf + row + "-" + i + ", ");
+                arr[row][i] = 0;
+            }
+        }
+    }
+
+    private static boolean isQueenSafe(int[][] arr, int r, int c) {
+
+        for (int i = r - 1; i >= 0; i--) {
+            if (arr[i][c] == 1) {
+                return false;
+            }
+        }
+        for (int i = r - 1, j = c - 1; i >= 0 && j >= 0; i--, j--) {
+            if (arr[i][j] == 1) {
+                return false;
+            }
+        }
+        for (int i = r - 1, j = c + 1; i >= 0 && j < arr.length; i--, j++) {
+            if (arr[i][j] == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public static void knightsTour(int[][] arr, int r, int c, int n) {
+        if(!isInBoard(r,c,arr.length)||arr[r][c]>0){
+            return;
+        }
+       else if (n == arr.length * arr.length) {
+            arr[r][c] = n;
+            displayBoard(arr);
+            arr[r][c] = 0;
+            return;
+        }
+        arr[r][c] = n;
+//        System.out.println("pre "+n);
+            knightsTour(arr, r - 2, c + 1, n + 1);
+
+            knightsTour(arr, r - 1, c + 2, n + 1);
+
+            knightsTour(arr, r + 1, c + 2, n + 1);
+
+            knightsTour(arr, r + 2, c + 1, n + 1);
+
+            knightsTour(arr, r + 2, c - 1, n + 1);
+
+            knightsTour(arr, r + 1, c - 2, n + 1);
+
+            knightsTour(arr, r - 1, c - 2, n + 1);
+
+            knightsTour(arr, r - 2, c - 1, n + 1);
+
+        arr[r][c] = 0;
+//        System.out.println("post "+n);
+
+
+    }
+
+    private static boolean isInBoard(int r, int c, int length) {
+        if (r < length && c < length && r >= 0 && c >= 0 ) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void displayBoard(int[][] chess) {
+        for (int i = 0; i < chess.length; i++) {
+            for (int j = 0; j < chess[0].length; j++) {
+                System.out.print(chess[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+    }
+
     public static void main(String[] args) {
 //        System.out.println(powerLogarithmic(5,0));
 //        towerOfHanoi(3,"a","b","c");
 
         int[] ar = {10, -4, 8, 0, 56, 89, 0, 7, 8, 9, 0, 9, 888, 9};
+        int[] arr = {10, 20, 30, 40, 50};
 //        maxOfArray(ar,0);
 //        System.out.println(maxA);
 //        System.out.println(returnIdxOfFirstOcr(ar,0,888));
 //        ArrayList<Integer> arl = returnAllIndices(ar, 0, 9);
-        ArrayList<String> s = printPermutation("abc");
-        System.out.println(s);
+//        ArrayList<String> s = printPermutation("abc");
+////        System.out.println(s);
 
+//        printEncodings("1203","");
+//        Scanner sc = new Scanner(System.in);
+//        int n= sc.nextInt();
+//        int m= sc.nextInt();
+//        int[][] arr = new int[n][m];
+//
+//        for (int i=0;i<arr.length;i++){
+//            for (int j=0;j<arr[0].length;j++) {
+//                arr[i][j]=sc.nextInt();
+//            }
+//            }
 
+//        targetSumSubset(arr,0,60,0,"");
+        int[][] chess = new int[5][5];
+        knightsTour(chess,2,0,1);
     }
+
 }
