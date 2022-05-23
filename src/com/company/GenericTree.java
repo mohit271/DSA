@@ -142,6 +142,7 @@ public class GenericTree {
 
     //using two queue
     public static void levelOrderTraversalLineWise(Node node) {
+        //remove print add child
         Queue<Node> mq = new ArrayDeque<>();
         mq.add(node);
         Queue<Node> cq = new ArrayDeque<>();
