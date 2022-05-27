@@ -351,7 +351,7 @@ public class BinaryTree {
             nm.max = Integer.MIN_VALUE;
             nm.min = Integer.MAX_VALUE;
             nm.isBSt = true;
-            nm.size=0;
+            nm.size = 0;
             return nm;
         }
 
@@ -363,19 +363,17 @@ public class BinaryTree {
         } else {
             rm.isBSt = true;
         }
-        rm.min=Math.min(node.data,Math.min(lt.min,rt.min));
-        rm.max=Math.max(node.data,Math.max(lt.max,rt.max));
-        if(rm.isBSt){
-            rm.size=lt.size+rt.size+1;
-            rm.data=node.data;
-        }
-        else if(lt.size>rt.size){
-            rm.size=lt.size;
-            rm.data=lt.data;
-        }
-        else{
-            rm.size=rt.size;
-            rm.data=rt.data;
+        rm.min = Math.min(node.data, Math.min(lt.min, rt.min));
+        rm.max = Math.max(node.data, Math.max(lt.max, rt.max));
+        if (rm.isBSt) {
+            rm.size = lt.size + rt.size + 1;
+            rm.data = node.data;
+        } else if (lt.size > rt.size) {
+            rm.size = lt.size;
+            rm.data = lt.data;
+        } else {
+            rm.size = rt.size;
+            rm.data = rt.data;
         }
         return rm;
     }

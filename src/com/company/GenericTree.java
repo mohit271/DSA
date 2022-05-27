@@ -8,24 +8,20 @@ import java.util.*;
 public class GenericTree {
 
 
-    /**
-     * single node of tree
-     */
+    // Represent a Single Node
     private static class Node {
         int data;
         ArrayList<Node> children = new ArrayList<>();
 
-        //default constructor
         Node() {
         }
-
         //null node constructor
         Node(int data) {
             this.data = data;
         }
     }
 
-    public class RepresentGenericTree implements Iterable<Integer>{
+    public static class RepresentGenericTree implements Iterable<Integer>{
         Node root;
         RepresentGenericTree(Node root){
             this.root=root;
